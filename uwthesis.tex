@@ -833,6 +833,19 @@ bibliography, the following sequence of commands usually works.
 \$\ pdflatex uwthesis
 \end{demo}
 
+\subsection{Unicode characters and modern fonts}
+
+One of the more antiquated aspects of the \TeX\ system is its
+use of pure ASCII character inputs and system specific fonts.
+Users of modern word processing systems have long ago left such
+things behind. Fortunately, in the \TeX\ world support for Unicode
+input (with all of the fancy characters it brings) and access to
+all of the True/OpenType fonts on a modern computer are available
+using the XeTeX system. \verb%http://xetex.sourceforge.net/%
+
+Once installed, it is a replacement for the {\tt pdflatex} command,
+just use {\tt xelatex} instead.
+
 \section{Printing}
 
 All implementations of \TeX\ provide the option of {\bf pdf} output,
