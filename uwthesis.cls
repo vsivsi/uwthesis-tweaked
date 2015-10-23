@@ -1,5 +1,5 @@
 %  ========================================================================
-%  Copyright (c) 1995-2012 The University of Washington
+%  Copyright (c) 1995-2014 The University of Washington
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -21,10 +21,18 @@
 %
 %    For the most recent edition of this class file see:
 %         http://staff.washington.edu/fox/tex/
+%    or
+%         https://github.com/UWIT-IAM/UWThesis.git
 %
 %
 % Version history
 %
+% 9.01,03/03/15, rename singlespace to uwsinglespace so no collision with setspace style
+% 9.00,11/13/14, modify for proquest style.  Adjust sample thesis appropriately
+% 8.04,03/06/14, return multi-page abstract to two sided
+% 8.03,06/19/12, fix textofChair for co-chairs
+% 8.02,04/02/12, Slight mods to fixup title and other fornt pages
+% 8.01,03/21/12, Slight modification to title pages
 % 8.00,02/03/12, Revise for electronic submission.  Revised title, no signature nor quoteslip
 % 7.00,06/27/11, Fix output page bug, add copyright page
 % 6.14,07/24/08, Remove large font from abstract title
@@ -69,7 +77,7 @@
 % Documentation is in the companion document (uwthesis.tex)
 %
 
-\ProvidesClass{uwthesis}[2012/02/03]
+\ProvidesClass{uwthesis}[2015/03/03]
 \NeedsTeXFormat{LaTeX2e}
  
 %
@@ -78,13 +86,20 @@
 
 \newwrite\tf@not
 
+\newif\ifproquest\proquestfalse
+\DeclareOption{proquest}% sets electrons-only, proquest style
+  {\proquesttrue}
+
 \newif\ifendnotes      % true if doing endnotes
   \endnotesfalse
 \newif\ifchapternotes  % true if doing chapternotes
   \chapternotesfalse
 \let\printchapternotes\relax
 \let\printendnotes\relax
- 
+
+\DeclareOption{widebindingmargin}% selects ProQuest style
+  {\widebindingmargintrue}  % is the default
+
 \DeclareOption{footnotes}% selects bottom-of-page notes (default)
   {}
 \DeclareOption{chapternotes}% selects end-of-chapter notes
@@ -109,11 +124,17 @@
 \DeclareOption{11pt}{\def\@f@ntsize{11pt}}
 \DeclareOption{12pt}{\def\@f@ntsize{12pt}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
-\ProcessOptions
+
 \PassOptionsToClass{\@f@ntsize}{book}
 \PassOptionsToClass{openany}{book}
 \ProcessOptions
 \LoadClass{book}
+
+\ifproquest
+  \typeout{Formatting for ProQuest}
+  \@twosidefalse
+  \@openrightfalse
+\fi
 
 \if@natbib
   \usepackage{natbib}
@@ -123,7 +144,7 @@
 % ---- page sizes ----------------------------------------------
 %
 % margins are 1 inch (72pt) all around,
-% except 1.5 inch (108pt) at the binding
+% except possibly 1.5" at binding
 %
 % text size computed from paper size
 %
@@ -135,6 +156,8 @@
 \headheight 12\p@
 \headsep 36\p@
 \oddsidemargin 108\p@ 
+\ifproquest\oddsidemargin 72\p@\fi
+\oddsidemargin 72\p@ 
 \evensidemargin 72\p@
 \newdimen\botmargin
 \botmargin 72\p@
@@ -156,7 +179,11 @@
 
 % ---------------
 
+% set most text to 'double' space
 \def\baselinestretch{1.5}    % not quite doublespaced
+
+% make it easier to switch to single-space lines in figures, tables, ...
+\def\uwsinglespace{\def\baselinestretch{1.0}\normalfont}
 
 \setcounter{totalnumber}{5}
 \setcounter{topnumber}{5}
@@ -262,7 +289,7 @@
 \def\footnoterule{\kern-3\p@
  \hrule width \columnwidth \kern 2.6\p@}
 \long\def\@makefntext#1{\parindent 1em\noindent \hangindent\parindent
- \def\baselinestretch{1.0}\normalfont
+ \uwsinglespace
  \hb@xt@1.8em{\hss\@makefnmark}#1}
  
 %
@@ -299,7 +326,7 @@
 \def\@makeparthead#1{ \vspace*{2pc} {\centering
  \ifnum \c@secnumdepth >\m@ne \large Part \thepart \par
  \vspace{10\p@} \fi 
-  \def\baselinestretch{1.0}\normalfont
+  \uwsinglespace
   \large\bf \uppercase\expandafter{#1}\par
  \nobreak \vspace{20\p@}} }
 %
@@ -345,7 +372,7 @@
 \def\@makechapterhead#1{ \vspace*{2pc} {\centering
  \ifnum \c@secnumdepth >\m@ne \large \@chapapp{} \Thechapter \par
  \vspace{10\p@} \fi 
-  \def\baselinestretch{1.0}\normalfont
+  \uwsinglespace
   \large\bf \uppercase\expandafter{#1}\par
  \nobreak \vspace{20\p@}} }
 %
@@ -510,7 +537,6 @@
    \let\xtrafullpage\fullpage
    \let\endxtrafullpage\endfullpage
 \else
-   \typeout{Formatting for oneside printing.}
    \def\xtrafullpage{\setbox\@@wholepage=\vbox\bgroup}
    \def\endxtrafullpage{\egroup\dp\@@wholepage\z@
       \vbox to\textheight{\vss\unvbox\@@wholepage\vss}\global\@XPtrue}
@@ -603,21 +629,23 @@
 \def\School#1{\gdef\@School{#1}} \School{University of Washington}
 \def\GSchool#1{\gdef\@GSchool{#1}} \GSchool{Graduate School}
 \def\Degreetext#1{\gdef\@Degreetext{#1}} 
-  \Degreetext{A dissertation submitted in partial fulfillment\\
-    of the requirements for the degree of}
+  \Degreetext{A dissertation\\ submitted in partial fulfillment of the\\requirements for the degree of}
 \def\Programtext#1{\gdef\@Programtext{#1}}  
-       \Programtext{Program Authorized to Offer Degree:\ \ }
+       \Programtext{Program Authorized to Offer Degree: }
 
-\def\textofChair#1{\gdef\@textofChair{#1}}  
-       \textofChair{Chair of the Supervisory Committee}
+\def\textofCommittee#1{\gdef\@textofCommittee{#1}}  
+       \textofCommittee{Reading Committee: }
 \def\textofDate#1{\gdef\@textofDate{#1}}  \textofDate{Date}
+
+\def\textofChair#1{\gdef\@textofChair{#1}}
+       \textofChair{Chair of the Supervisory Committee: }
 
 \newcount\@Chair \@Chair0
 \def\Chair#1#2#3{
   \global\@namedef{C:\expandafter\the\@Chair}{#1}
   \global\@namedef{T:\expandafter\the\@Chair}{#2}
   \global\@namedef{D:\expandafter\the\@Chair}{#3}
-  \ifnum\@Chair>0\textofChair{Co-Chairs of the Supervisory Committee}\fi
+  \ifnum\@Chair>0\textofChair{Co-Chairs of the Supervisory Committee:}\fi
   \global\advance\@Chair by1}
 
 
@@ -642,13 +670,13 @@
     \cleardoublepage
     \vspace{7pc}
     \begin{center}
-      {\def\baselinestretch{1.0}\normalfont\Large
+      {\uwsinglespace\Large
       \lineskip 3ex
       \@Title\par}
       \par\vskip\z@ plus4fill\relax
       \@Author
       \par\vskip\z@ plus4fill\relax
-      {\def\baselinestretch{1.0}\normalfont
+      {\uwsinglespace
       \@Degreetext\par}
       \par\vskip\z@ plus2fill\relax
       \@Degree
@@ -659,6 +687,7 @@
       \par\vskip\z@ plus4fill\relax
 
       % signers
+      \@textofCommittee \par 
       \count1=0
       \@whilenum \count1<\@Chair \do
        {\vskip12\p@ \baselineskip12pt
@@ -671,7 +700,7 @@
         \advance\count1 by1}
 
       \par\vskip\z@ plus4fill\relax
-       {\def\baselinestretch{1.0}\normalfont
+       {\uwsinglespace
       \@Programtext \par \@Program\par}
       \par\vskip\z@ plus1fill\relax
     \end{center}
@@ -693,12 +722,12 @@
       \par\vskip1pc
       {\bf\@textofAbstract}%
       \par\vskip1pc
-      {\def\baselinestretch{1.0}\normalfont \@Title \par}
+      {\uwsinglespace \@Title \par}
       \par\vskip1pc
       \@Author
       \par\vskip1pc
-       {\def\baselinestretch{1.0}\normalfont
-      \@textofChair:
+       {\uwsinglespace
+      \@textofChair
       \par 
       \count1=0
       \@whilenum \count1<\@Chair \do
@@ -709,18 +738,19 @@
        \par}
       \par\vskip1pc
    \end{center}
-   \if@twoside
-    \begingroup % have to set multiple abstract pages 1-sided
-    \def\@blankpage{\if\@@blankpage B
-            \setbox\abs@savebox\box255\shipout\vbox{}\setbox255\box\abs@savebox
-            \global\advance\count\z@ by1\fi
-            \global\def\@@blankpage{B}}
-    \def\@@blankpage{A}
-    \output=\expandafter{\expandafter\@blankpage\the\output}
-   \fi
+%  if you need single sided abstract pages uncomment this section and the next
+%   \if@twoside
+%    \begingroup % have to set multiple abstract pages 1-sided
+%    \def\@blankpage{\if\@@blankpage B
+%            \setbox\abs@savebox\box255\shipout\vbox{}\setbox255\box\abs@savebox
+%            \global\advance\count\z@ by1\fi
+%            \global\def\@@blankpage{B}}
+%    \def\@@blankpage{A}
+%    \output=\expandafter{\expandafter\@blankpage\the\output}
+%   \fi
    #1
    \vfill\clearpage
-   \if@twoside\endgroup\fi
+%   \if@twoside\endgroup\fi
    \let\abstract\relax}
 %
 %
@@ -735,7 +765,7 @@
    \setcounter{page}{1}
    \hbox to\textwidth{\hfill Page}
    {\let\footnotemark\relax  % in case one is in the title
-    \def\baselinestretch{1.0}\normalfont
+    \uwsinglespace
    \@starttoc{toc}
     }
    }
@@ -749,7 +779,7 @@
    \addcontentsline{toc}{chapter}{\protect\@textofLoF}
    \hbox to\textwidth{Figure Number \hfill Page}
    {\let\footnotemark\relax  % in case one is in the title
-    \def\baselinestretch{1.0}\normalfont
+    \uwsinglespace
    \@starttoc{lof}
     }
    }
@@ -762,7 +792,7 @@
    \addcontentsline{toc}{chapter}{\protect\@textofLoT}
    \hbox to\textwidth{Table Number \hfill Page}
    {\let\footnotemark\relax  % in case one is in the title
-    \def\baselinestretch{1.0}\normalfont
+    \uwsinglespace
    \@starttoc{lot}
     }
    }
@@ -778,7 +808,7 @@
  \usecounter{enumi}}
  \def\newblock{\hskip .11em plus .33em minus .07em}
  \sloppy\clubpenalty4000\widowpenalty4000
- \def\baselinestretch{1.0}\normalfont
+ \uwsinglespace
  \sfcode`\.=1000\relax}
  
 %
@@ -815,7 +845,7 @@
 %
 \renewenvironment{glossary}
   {\begin{list}{}{\setlength\itemindent{\parindent}
-   \def\makelabel##1{\footnotesize\uppercase{##1:}\hfill}}}
+   \def\makelabel##1{\footnotesize\uppercase{##1:}\hfill}\uwsinglespace}}
   {\end{list}}
 
 % End of the thesis style

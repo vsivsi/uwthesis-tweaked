@@ -1,5 +1,5 @@
 %  ========================================================================
-%  Copyright (c) 1995-2012 The University of Washington
+%  Copyright (c) 1985-2014 The University of Washington
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 %  ========================================================================
 %
 
-% Documentation for UW thesis document style for LaTeX
+% Documentation for University of Washington thesis LaTeX document class
 % by Jim Fox
 % fox@washington.edu
 %
-%    Revised for version 2012/02/03 of uwthesis.cls
+%    Revised for version 2015/03/03 of uwthesis.cls
 %
 %    This document is contained in a single file ONLY because
 %    I wanted to be able to distribute it easily.  A real thesis ought
@@ -39,7 +39,7 @@
 %    Printed in twoside style now that that's allowed
 %
  
-\documentclass [11pt, twoside] {uwthesis}[2012/02/03]
+\documentclass [11pt, proquest] {uwthesis}[2015/03/03]
  
 %
 % The following line would print the thesis in a postscript font 
@@ -71,6 +71,8 @@
 % --- end-of-sample-stuff ---
  
 
+
+
 \begin{document}
  
 % ==========   Preliminary pages
@@ -87,7 +89,7 @@
   for Thesis Preparation by Technical and\\
   Non-technical Degree Candidates}
 \Author{Jim Fox}
-\Year{2012}
+\Year{1985-2014}
 \Program{UW Information Technology}
 
 \Chair{Name of Chairperson}{Title of Chair}{Department of Chair}
@@ -104,9 +106,8 @@
 % You just use the \titlepage as commented out above
 
 {\Degreetext{A dissertation%
-  \footnote[2]{an egocentric imitation, actually}
-  submitted in partial fulfillment of\\
-  the requirements for the degree of}
+  \footnote[2]{an egocentric imitation, actually}\\
+  submitted in partial fulfillment of the\\ requirements for the degree of}
  \def\thefootnote{\fnsymbol{footnote}}
  \let\footnoterule\relax
  \titlepage
@@ -128,8 +129,7 @@
 \abstract{%
 This sample dissertation is an aid to students who are attempting
 to format their theses with \LaTeX, a sophisticated
-text formatter widely available at the University of Washington
-and other institutions of higher learning.
+text formatter widely used by mathematicians and scientists everywhere.
  
 \begin{itemize}
 \item It describes the use of a specialized
@@ -139,7 +139,7 @@ The macros customize \LaTeX\ for the correct thesis style,
 allowing the student to concentrate on the substance of
 his or her text.%
 \footnote{See Appendix A to obtain the source to this
- thesis and the style file.}
+ thesis and the class file.}
 \item It demonstrates the solutions to a variety of
 formatting challenges found in thesis production.
 \item It serves as a template for a real dissertation.
@@ -244,41 +244,24 @@ The utility of a clean, professionally prepared thesis is well
 documented%
 \footnote{See, for example,
   W.~Shakespeare\cite{Hamlet} for a recent discussion.}
-but, until recently, a degree candidate had no recourse but
-to submit his or her thesis to a typist for completion.
-Revisions were difficult and time consuming, and even at its best the
-resultant thesis still looked typed.
-The advent of computerized typesetting has revolutionized
-thesis preparation, and \TeX\ in particular brings to the
-university student the power and flexibility of an
-`industrial-strength' typesetter.
+and, even if you never intend to actually print your thesis,
+you still ought to format it as if that were your intention.
  
- 
-\TeX\ is a flexible,
-complete, and professional typesetting system.
-It has been programmed to produce
-the same document on all machines, so
-a suitable printer can always be found for the final copy
-while drafts are made on more conventional and inexpensive printers.
-The `suitable' standard is a 300 dot-per-inch laser printer,
-which is excellent for thesis production.  Many such laser printers
-are available about the campus.
- 
+\TeX\ facilitates that. It is a flexible,
+complete and professional typesetting system.
+It will produce {\bf pdf} output as required by the Graduate School.
+
 \section{The Purpose of This Sample Thesis}
  
 This sample is both a demonstration of the quality and
-propriety of a \LaTeX\footnote{We mean the \LaTeXe\ version
-of \LaTeX.  Earlier versions, now called \LaTeX2.10 were much
-different.} formatted thesis, and is 
-documentation for the preparation of a thesis.
+propriety of a \LaTeX formatted thesis and  
+documentation for its preparation.
 It has made extensive use of a custom class file
 developed specifically for this purpose
 at the University of Washington.  Chapter~II discusses
 \TeX\ and \LaTeX.
 Chapter III describes the additional macros and functions
-provided by the custom thesis class file.  Finally, Chapter IV discusses
-some special problems due to the inherent differences among the various
-computers and printers that support \LaTeX.
+provided by the custom thesis class file.  Finally, Chapter IV hopes to tie things up.
  
 It is 
 impossible to predict all the formatting problems one will encounter
@@ -311,8 +294,8 @@ a category rather than exact text.  For example,
 \section{Nota bene}
  
 This sample thesis was produced by the \LaTeX\ document class it describes
-and its format is consonant with the Graduate School's electronic dissertation guidelines%
-\cite{SP}.
+and its format is consonant with the Graduate School's electronic dissertation guidelines,
+as of November, 2014, at least.
 However, use of this package does not guarantee acceptability
 of a particular thesis.
  
@@ -324,9 +307,7 @@ of a particular thesis.
 The \TeX\ formatting program is the creation of
 Donald Knuth of Stanford University.
 It has been implemented on nearly every general purpose computer and
-produces exactly\footnote{``Exactly'' specifically excludes the
-  inherent variety in print devices.}
-the same copy on all machines.
+produces exactly the same copy on all machines.
  
 \section{What is it; why is it spelled that way; 
 and what do
@@ -334,10 +315,7 @@ really long section titles look like in the text and in the
 Table of Contents?}
  
 \TeX\ is a formatter.  A document's format is controlled
-by commands embedded in the text.
-% The peculiar look to the names indicate that \TeX\ is also
-% a typesetting program.  Each character and rule on the page
-% is precisely positioned.
+by commands embedded in the text.  
 \LaTeX\ is a special version of \TeX---preloaded
 with a voluminous set of macros that simplify most
 formatting tasks.
@@ -361,6 +339,7 @@ provided by the uwthesis document class.
  
 \begin{figure}
 \begin{demo}
+\uwsinglespace
 \\chapter\{A Brief\\\\Description of \\TeX\}
 
 The \\TeX\\ formatting program is the creation of
@@ -423,12 +402,12 @@ thoroughly cover this topic.
  
 Most \LaTeX\ implementations at the University are tailored
 for the English language.  However, \LaTeX\ will format many
-other languages. 
-Consult your department or contact the
-Center for Advanced Research Technology in the Arts and Humanities (CARTAH),
+other languages.  Unfortunately, this author has never been successful in 
+learning more than a smattering of anything other than English.
+Consult your department or the Tex Users Group.
 \smallskip
 \begin{center}
-{\tt cartha@u.washington.edu},
+{\tt http://tug.org/},
 \end{center}
 \smallskip
 for assistance with non-English formatting.
@@ -439,7 +418,7 @@ The definitions are not trivial.
 Students who attempt to print a thesis with
 custom fonts may soon proclaim,
  
-% note.  This is not the correct way to print Greek
+% Note.  This is not the ideal way to print Greek
 \medskip
 \begin{center}
 ``$\mathaccent"7027\alpha\pi o\kern1pt\theta\alpha\nu\epsilon\hat\iota\nu$
@@ -452,14 +431,14 @@ custom fonts may soon proclaim,
 \chapter{The Thesis Unformatted}
  
 This chapter describes the uwthesis class (\texttt{uwthesis.cls},
-version dated 2011/06/27)
+version dated 2014/11/13)
 in detail 
 and shows how it was used to format the thesis.
 A working knowledge of Lamport's \LaTeX\ manual\cite{Lbook} is assumed.
  
 \section{The Control File}
  
-The source to this sample thesis is contained in a single file
+The source to this sample thesis is a single file
 only because ease of distribution was a concern.
 You should not do this.  Your task will be much easier if you
 break your thesis into several files:  a file for the preliminary pages,
@@ -477,28 +456,14 @@ but contains no text of its own.
  
 %  control file caption and figure
 %
-\begin{figure}[p]
- \begin{leftfullpage}
-  \caption[A thesis control file]%
-   {\narrower A thesis control file ({\tt thesis.tex}).
-   This file is the input to \LaTeX\ that will produce a
-   thesis.  It contains no text, only commands which
-   direct the formatting of the thesis.
-   This is also an example of a `facing page' caption.  It is guaranteed
-   to appear on a lefthand page, facing the figure contents on the right.
-   See the text.}
-  \label{control-file}
- \end{leftfullpage}
-\end{figure}
 %
 \begin{figure}[p]
-%
  \begin{fullpage}
-  \footnotesize
+  \uwsinglespace
   \begin{verbatim}
     % LaTeX thesis control file
  
-    \documentclass[11pt,twoside]{uwthesis}
+    \documentclass [11pt, proquest]{uwthesis}[2014/11/13]
  
     \begin{document}
  
@@ -529,15 +494,23 @@ but contains no text of its own.
     \include{vita} 
     \end{document}
   \end{verbatim}
+  \caption[A thesis control file]%
+   {\narrower A thesis control file ({\tt thesis.tex}).
+   This file is the input to \LaTeX\ that will produce a
+   thesis.  It contains no text, only commands which
+   direct the formatting of the thesis.
+   }
+  \label{control-file}
  \end{fullpage}
 \end{figure}
  
 The first section, from the \verb"\documentclass" to
-the \verb"\begin\{document\}", defines the document class and options.
-This thesis has specified two-sided formatting, which is now
-allowed by the Graduate School.  Two sided printing is now
-actually \LaTeX's default.  If you want one sided printing
-you must specify \verb"oneside".
+the \verb"\begin{document}", defines the document class and options.
+This sample thesis specifies the \texttt{proquest} style, which is now
+required by the Graduate School and is the default.  
+Two other, now dated, other styles are available:  \verb"twoside", which is similar but 
+produces a wider binding margin and is more suitable for paper printing; and
+\verb"oneside", which is really old fashoned.
 This sample also specified a font size
 of 11 points. 
 Possible font size options are: \verb"10pt", \verb"11pt", and \verb"12pt".
@@ -572,8 +545,8 @@ The control sequence \verb"\appendix" instructs \LaTeX\ to
 begin using the term `Appendix' rather than `Chapter'.
  
  
-Sections and subsections of a chapter are specified
-by  \verb"\section" and \verb"\subsection", respectively.
+Specify sections and subsections of a chapter 
+with  \verb"\section" and \verb"\subsection", respectively.
 In this thesis chapter and section
 titles are written to the table of contents.
 Consult Lamport\cite[pg. 176]{Lbook} to see which
@@ -603,36 +576,30 @@ Full page floats and facing captions are exceptions to this rule.
 
 If you want a figure or table to occupy a full page enclose the
 contents in a \texttt{fullpage} environment.  
-See figures~\ref{facing-caption}.
+See figure~\ref{facing-caption}.
 
-Facing page captions are described
-in the Style Manual\cite{SP}.  They have different meanings
-depending on whether you are using
-the one-side or two-side thesis style.
+\subsubsection{Facing pages}
+Facing page captions are an artifact of traditional, dead-tree printing,
+where a left-side (even) page faces a right-side (odd) page.
 
-
-If you are using the two-side style,
-facing captions
-are full page captions for full page figures or tables
-and must face the illustration to which they refer.
+In the \texttt{twoside} style, a facing caption
+is full page caption for a full page figure or table
+and should face the illustration to which it refers.
 You must explicitly format both pages. 
-The caption part must appear on an even page
-(left side) and the figure or table must
-come on the following odd page (right side).
+The caption part appears on an even page
+(left side) and the figure or table
+comes on the following odd page (right side).
 Enclose the float contents for the caption 
 in a \texttt{leftfullpage} environment,
 and enclose the float contents for the figure or table 
 in a \texttt{fullpage} environment.
-Figure~\ref{control-file}, for example,
-required a full page so its caption (on a facing caption page)
-would have been formatted as shown in figure~\ref{facing-caption}a.
 The first page (left side) contains the caption. The second page
 (right side) could be left blank.  A picture or graph might be pasted onto
-this space.
+this space. See figure~\ref{facing-caption}.
 
 
 \begin{figure}[t]
-\footnotesize
+\uwsinglespace
 \begin{verbatim}
      \begin{figure}[p]% the left side caption
        \begin{leftfullpage}
@@ -646,70 +613,19 @@ this space.
        \end{fullpage}
      \end{figure}
 \end{verbatim}
-\caption(a){This text would create a
-  double page figure in the two-side style.}
+\caption[Generating a facing caption page]{This text would create a
+  double page figure in the two-side styles. }
 \label{facing-caption}
 \end{figure}
  
-\begin{figure}[t]
-\footnotesize
-\begin{verbatim}
-     \begin{figure}[p]
-        \begin{leftfullpage}
-           \caption{ . . . }
-        \end{leftfullpage}
-     \end{figure}
-     \begin{figure}[p]% the right side space
-       \begin{xtrafullpage}
-          . . .
-          ( note.. no caption here )
-       \end{xtrafullpage}
-     \end{figure}
-\end{verbatim}
-\caption(b)[Generating a facing caption page]{This text would create a
-  facing caption page with the accompaning figure in the one-side style.}
-\end{figure}
+You can use these commands with the \texttt{proquest} style, but they have little
+effect on online viewing.
  
-If instead you are using the one-side style,
-facing caption pages are still
-captions for full page figures or tables
-that appear on the left-hand page (facing the illustration on the
-right-hand page).  
-However, the page number and binding offset are reversed
-from their normal positions.
-Format these captions by enclosing the float contents
-in a \texttt{leftfullpage} environment.
-Because you are printing on only one side of each sheet, you must manually
-turn over this caption sheet. 
-You then have the choice of inserting a preprinted illustration or
-formatting one to print with the thesis. 
-In either case no page number should appear
-on the illustration page, nor should the page number increment. 
-Enclose your figure's text
-in an \texttt{xtrafullpage} environment, which will cause the
-page numbers to come out right.  
-You can, of course, leave out the illustration and insert a preprinted
-copy later. 
-Figure~\ref{facing-caption}b shows how to format a facing caption page
-in the one-side style. Note that, in this case, the illustration
-was also printed.
-
-In the two-side style the \texttt{xtrafullpage} environment acts just like the
-\texttt{fullpage} environment.  It does not produce a numberless page.
-
-
  
 \subsection{Horizontal Figures and Tables}
 Figures and tables may be formatted horizontally
 (a.k.a.\ landscape) as long as their captions appear
-horizontal also.  \LaTeX\ will format landscape material for you
-if a couple of conditions are met.  You have to have a printer
-and printer driver that allow rotations and
-you have to have a couple of add-on \LaTeX\ packages.  
-
-% Users of PostScript printers and Uniform Access computers 
-% at the University of Washington will conform to both requirements,
-% as will users of PC\TeX\ if they use postscript.
+horizontal also.  \LaTeX\ will format landscape material for you.
 
 Include the \texttt{rotating} package 
 \begin{demo}
@@ -721,7 +637,7 @@ Figure~\ref{sideways} is an example of how a landscape
 table might be formatted. 
 
 \begin{figure}[t]
-\footnotesize
+\uwsinglespace
 \begin{verbatim}
      \begin{sidewaystable}
          ...
@@ -773,6 +689,15 @@ use the format:
 where {\em x} is {\tt b}, {\tt c}, \ldots.
 The parts will be lettered (with `b', `c', \ldots).
 
+\subsection{Line spacing}
+
+Normally line spacing will come out like it should. However, the 
+ProQuest style allows single spacing in certain situations:
+figure content, some lists, and etc.
+Use \verb"\uwsinglespace" to switch to single spacing within
+a \verb"\begin{}" and \verb"\end{}" block.
+The code examples in this document does this. 
+
 \section{The Preliminary Pages}
  
 These are easy to format only because they are relatively invariant
@@ -817,13 +742,17 @@ if you're writing a Master's thesis instead of a dissertation.\footnote{If you u
 be included with the other information before \\copyrightpage".}
 
 \begin{list}{}{\itemindent\parindent\itemsep0pt
-   \def\makelabel#1{\texttt{\char`\\#1}\hfill}}
+   \def\makelabel#1{\texttt{\char`\\#1}\hfill}\uwsinglespace}
 \item[Degree\char`\{{\it degree name}\char`\}]
    defaults to ``Doctor of Philosophy''
 \item[School\char`\{{\it school name}\char`\}] defaults to
 ``University of Washington''
 \item[Degreetext\char`\{{\it degree text}\char`\}] defaults to
 ``A dissertation submitted \ldots''
+\item[textofCommittee\char`\{{\it committee label}\char`\}] defaults to
+``Reading Committee:''
+\item[textofChair\char`\{{\it chair label}\char`\}] defaults to
+``Chair of the Supervisory Committee:''
 \end{list}
 
 These definitions must appear \underline{before} the \verb"\titlepage" command.
@@ -888,19 +817,19 @@ It appears at the end of your thesis, just after the appendices.
   ({\it and printing if you must})}
  
  
-\TeX\ has been designed to produce exactly the same document
-on all computers and on all printers.  {\it Exactly the same}
+From a given source \TeX\ will produce exactly the same document
+on all computers and, if needed, on all printers.  {\it Exactly the same}
 means that the various spacings, line and page breaks, and
-even hyphenations will occur at the same places
-when the document is formatted on a variety of computers.
-However, the way you edit text files and run \LaTeX\ varies
-from system to system.
- 
+even hyphenations will occur at the same places.
+
+How you edit your text files and run \LaTeX\ varies
+from system to system and depends on your personal preference.
+
 \section{Running}
 
-Unfortunately, the author is woefully out of water where 
+The author is woefully out of his depth where 
 \TeX\ on Windows is concerned.  Google would be his resource.
-On a UNIX system he types
+On a linux system he types
 
 \begin{demo}
 \$\ pdflatex uwthesis
@@ -912,9 +841,9 @@ and it generally works.
 \section{Printing}
  
 All implementations of \TeX\ provide the option of {\bf pdf} output,
-which is all the Graduate School now wants.  Even if you intend to
-print a copy or two of your thesis---the best way to admire it---create a 
-{\tt pdf} anyway.  It will print anywhere.
+which is all the Graduate School requires.  Even if you intend to
+print a copy of your thesis create a 
+{\tt pdf}.  It will print most anywhere.
 
 \printendnotes
 
