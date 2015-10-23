@@ -36,8 +36,8 @@
 % 8.00,02/03/12, Revise for electronic submission.  Revised title, no signature nor quoteslip
 % 7.00,06/27/11, Fix output page bug, add copyright page
 % 6.14,07/24/08, Remove large font from abstract title
-% 6.14,04/15/08, Re-Fix first page bottom margin; raise quote slip 
-% 6.13,03/31/08, Fix first page bottom margin; 
+% 6.14,04/15/08, Re-Fix first page bottom margin; raise quote slip
+% 6.13,03/31/08, Fix first page bottom margin;
 % 6.12,03/21/07, Better handling of label inside footnote with chapternotes
 % 6.11,08/02/06, Bold "abstract", "Page" heading on toc
 % 6.10,10/25/05, Fix co-chair lines
@@ -54,7 +54,7 @@
 % 5.8, 06/12/03, Minor changes to the endnotes pagenation
 % 5.7, 08/14/00, Minor changes to the quote slip
 % 5.6, 06/19/00, 'Doctorial' -> 'Doctoral'
-% 5.5, 05/30/00, New text for quote slips (and 'doctorial' -> 'doctoral') 
+% 5.5, 05/30/00, New text for quote slips (and 'doctorial' -> 'doctoral')
 % 5.4, 10/29/99, Add \xtrafullpage for oneside fullpage figures
 % 5.3, 08/09/99, Correct spelling errors in quote slips
 % 5.2, 07/20/99, Allow 10pt, 11pt, and 12pt class options
@@ -79,7 +79,7 @@
 
 \ProvidesClass{uwthesis}[2015/03/03]
 \NeedsTeXFormat{LaTeX2e}
- 
+
 %
 % footnote stuff for option processing
 %
@@ -152,12 +152,12 @@
 \voffset -1in  % undo primitive default margins
 \hoffset -1in
 
-\topmargin 72\p@  
+\topmargin 72\p@
 \headheight 12\p@
 \headsep 36\p@
-\oddsidemargin 108\p@ 
+\oddsidemargin 108\p@
 \ifproquest\oddsidemargin 72\p@\fi
-\oddsidemargin 72\p@ 
+\oddsidemargin 72\p@
 \evensidemargin 72\p@
 \newdimen\botmargin
 \botmargin 72\p@
@@ -196,7 +196,7 @@
 \setlength\abovecaptionskip{10\p@}
 \setlength\belowcaptionskip{10\p@}
 
- 
+
 %
 %  ----  Footnotes  ------------------------------------------
 %
@@ -291,7 +291,7 @@
 \long\def\@makefntext#1{\parindent 1em\noindent \hangindent\parindent
  \uwsinglespace
  \hb@xt@1.8em{\hss\@makefnmark}#1}
- 
+
 %
 %  ----  Text pages  ----------------------------------
 %
@@ -311,21 +311,21 @@
    \pagenumbering{arabic}
      \footskip\z@
    }
- 
+
 \def\appendix{\par
  \setcounter{chapter}{0}
  \setcounter{section}{0}
  \def\@chapapp{\protect\@textofAppendix}
  \def\Thechapter{\Alph{chapter}}
  \def\thechapter{\Alph{chapter}}}
- 
- 
+
+
 %
 %  Parts
 %
 \def\@makeparthead#1{ \vspace*{2pc} {\centering
  \ifnum \c@secnumdepth >\m@ne \large Part \thepart \par
- \vspace{10\p@} \fi 
+ \vspace{10\p@} \fi
   \uwsinglespace
   \large\bf \uppercase\expandafter{#1}\par
  \nobreak \vspace{20\p@}} }
@@ -371,7 +371,7 @@
 %
 \def\@makechapterhead#1{ \vspace*{2pc} {\centering
  \ifnum \c@secnumdepth >\m@ne \large \@chapapp{} \Thechapter \par
- \vspace{10\p@} \fi 
+ \vspace{10\p@} \fi
   \uwsinglespace
   \large\bf \uppercase\expandafter{#1}\par
  \nobreak \vspace{20\p@}} }
@@ -450,7 +450,7 @@
     \@dottedtocline{0}{\z@}{\@tempdima}{#1}{#2}%
   \fi}
 
-% 
+%
 % extra space between toc entries
 %
 \def\@dottedtocline#1#2#3#4#5{%
@@ -472,48 +472,6 @@
      \par}%
   \fi}
 
-%
-% ------ Special captions ---------------------
-%
-% \caption[]{text} produces normal caption and numbering
-% \caption(-){(continued)} produces `(continued)' caption and 
-%        same-as-last caption number
-% \caption(x)[]{text} produces lettered caption.  1.1a, 1.1b, ...
-%        If (x) is (a) or (A) then caption number is incremented,
-%        else it is same numbered.
-
-\def\thecaptionletter{}
-\newif\ifcaptiontotoc\captiontotoctrue
-
-\def\caption{\@ifnextchar({\@specialcaption}{\@normalcaption}}
-
-\def\@normalcaption{\refstepcounter\@captype \@dblarg{\@caption\@captype}}
-\def\@specialcaption(#1){%
-  \def\thecaptionletter{#1}%
-  \captiontotocfalse
-  \if#1-\def\thecaptionletter{}\fi
-  \if#1a\refstepcounter\@captype\captiontotoctrue\fi
-  \if#1A\refstepcounter\@captype\captiontotoctrue\fi
-  \@dblarg{\@caption\@captype}}
-
-\long\def\@caption#1[#2]#3{\par
-  \ifcaptiontotoc
-    \addcontentsline{\csname
-    ext@#1\endcsname}{#1}{\protect\numberline{\csname
-    the#1\endcsname}{\ignorespaces #2}}%
-  \fi
-  \begingroup
-    \@parboxrestore
-    \def\baselinestretch{1.0}
-    \normalsize  % UW grad school doesn't allow \footnotesize
-    \@makecaption{\csname fnum@#1\endcsname
-        \thecaptionletter}{\ignorespaces #3}\par
-  \endgroup}
-
-\def\@listI{\leftmargin\leftmargini \parsep 7\p@ plus 3\p@ minus 1\p@\topsep
- 12\p@ plus 5\p@ minus 6\p@\itemsep 7\p@ plus 3\p@ minus 1\p@}
- 
- 
 %
 %  ----  Facing pages and double-page figures and tables
 %
@@ -608,10 +566,10 @@
 %
 \def\prelimpages{ % sets page numbering for the preliminary pages
    \pagestyle{empty} % will be {plain} at start of toc
-   \pagenumbering{roman}
+   \pagenumbering{alph}
    \setcounter{page}{1}
    \footskip 30\p@ % allowance for the roman page numbers
-    \advance\textheight by-\footskip  
+    \advance\textheight by-\footskip
    }
 %
 %      (The following macros are used once and discarded)
@@ -628,12 +586,12 @@
 %
 \def\School#1{\gdef\@School{#1}} \School{University of Washington}
 \def\GSchool#1{\gdef\@GSchool{#1}} \GSchool{Graduate School}
-\def\Degreetext#1{\gdef\@Degreetext{#1}} 
+\def\Degreetext#1{\gdef\@Degreetext{#1}}
   \Degreetext{A dissertation\\ submitted in partial fulfillment of the\\requirements for the degree of}
-\def\Programtext#1{\gdef\@Programtext{#1}}  
+\def\Programtext#1{\gdef\@Programtext{#1}}
        \Programtext{Program Authorized to Offer Degree: }
 
-\def\textofCommittee#1{\gdef\@textofCommittee{#1}}  
+\def\textofCommittee#1{\gdef\@textofCommittee{#1}}
        \textofCommittee{Reading Committee: }
 \def\textofDate#1{\gdef\@textofDate{#1}}  \textofDate{Date}
 
@@ -654,7 +612,7 @@
   \global\@namedef{S:\expandafter\the\@Sign}{#1}
   \global\advance\@Sign by1}
 
- 
+
 \def\copyrightpage{                   % Prints the copyright page
     \vspace{7pc}
     \begin{center}
@@ -665,7 +623,7 @@
       \par\vskip\z@ plus2fill\relax
     \end{center}
   \let\copyrightpage\relax\relax}
- 
+
 \def\titlepage{                   % Prints the title page
     \cleardoublepage
     \vspace{7pc}
@@ -687,7 +645,7 @@
       \par\vskip\z@ plus4fill\relax
 
       % signers
-      \@textofCommittee \par 
+      \@textofCommittee \par
       \count1=0
       \@whilenum \count1<\@Chair \do
        {\vskip12\p@ \baselineskip12pt
@@ -706,7 +664,7 @@
     \end{center}
      \vspace{2pc}\relax
   \let\titlepage\relax}
- 
+
 
 %
 %   Abstract
@@ -728,7 +686,7 @@
       \par\vskip1pc
        {\uwsinglespace
       \@textofChair
-      \par 
+      \par
       \count1=0
       \@whilenum \count1<\@Chair \do
        {% \vskip12\p@ \baselineskip12pt
@@ -762,6 +720,7 @@
    \chapter*{\@textofToC\@mkboth{}{}}
    \pagestyle{plain}
    \thispagestyle{plain}
+   \pagenumbering{roman}
    \setcounter{page}{1}
    \hbox to\textwidth{\hfill Page}
    {\let\footnotemark\relax  % in case one is in the title
@@ -810,7 +769,7 @@
  \sloppy\clubpenalty4000\widowpenalty4000
  \uwsinglespace
  \sfcode`\.=1000\relax}
- 
+
 %
 %   Acknowledgments
 %
@@ -820,7 +779,7 @@
    #1\par
    \vfill
    \let\acknowledgments\relax}
- 
+
 %
 %   Dedication
 %
@@ -830,7 +789,7 @@
    #1\par
    \vfill
    \let\dedication\relax}
- 
+
 %
 %   Vita
 %
@@ -839,7 +798,7 @@
    #1\par
    \vfill
    \let\vita\relax}
- 
+
 %
 %   Gratis definition of a glossary environment
 %
