@@ -180,10 +180,12 @@
 % ---------------
 
 % set most text to 'double' space
-\def\baselinestretch{1.5}    % not quite doublespaced
+% \def\baselinestretch{1.5}    % not quite doublespaced
+\usepackage[doublespacing]{setspace}
 
 % make it easier to switch to single-space lines in figures, tables, ...
 \def\uwsinglespace{\def\baselinestretch{1.0}\normalfont}
+% \def\uwsinglespace{}
 
 \setcounter{totalnumber}{5}
 \setcounter{topnumber}{5}
