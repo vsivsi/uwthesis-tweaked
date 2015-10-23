@@ -39,7 +39,7 @@
 %    Printed in twoside style now that that's allowed
 %
 
-\documentclass [11pt, proquest] {uwthesis}[2015/03/03]
+\documentclass [12pt, proquest] {uwthesis}[2015/03/03]
 
 %
 % The following line would print the thesis in a postscript font
@@ -70,8 +70,39 @@
 \let\mffont=\sf
 % --- end-of-sample-stuff ---
 
+\usepackage{ifxetex,ifluatex}
 
-\usepackage[pdftex]{hyperref}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{eurosym}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+  % \setmainfont[Scale=1.12]{Crimson}
+  % \setsansfont{Helvetica}
+  % \setmonofont[Mapping=tex-ansi]{Hack}
+\fi
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+\ifxetex
+  \usepackage[unicode=false, xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+
 \hypersetup{%
 	pdfauthor = {Jim Fox},
 	pdftitle = {The Suitability of the \LaTeX\ Text Formatter for Thesis Preparation by Technical and Non-technical Degree Candidates},
@@ -82,6 +113,15 @@
 	bookmarksopen = {true},
 	pdfpagelayout = {TwoColumnRight}, % For the two-sided version.
 }
+
+\usepackage{listings}
+
+\usepackage{longtable,booktabs}
+
+\usepackage[normalem]{ulem}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \begin{document}
 
@@ -318,10 +358,9 @@ Donald Knuth of Stanford University.
 It has been implemented on nearly every general purpose computer and
 produces exactly the same copy on all machines.
 
-\section{What is it; why is it spelled that way;
-and what do
-really long section titles look like in the text and in the
-Table of Contents?}
+
+\section{What is it; why is it spelled that way; and what do really long
+section titles look like in the text and in the Table of Contents?}
 
 \TeX\ is a formatter.  A document's format is controlled
 by commands embedded in the text.
